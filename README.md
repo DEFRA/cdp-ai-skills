@@ -45,10 +45,10 @@ ln -s "$PWD/cdp-ai-skills/skills/cdp/prr" ~/.cursor/skills/prr
 
 Then run `/prr` in Cursor Agent chat.
 
-Update later with:
+Update later by running this in your `cdp-ai-skills` clone:
 
 ```bash
-git -C "$PWD/cdp-ai-skills" pull
+git pull
 ```
 
 ### Other agents

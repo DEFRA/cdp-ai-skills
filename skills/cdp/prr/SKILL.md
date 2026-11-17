@@ -30,9 +30,9 @@ The service is deployed to an internal PaaS called CDP.
 - Fluentbit log sidecar
 - Nginx ssl termination sidecar (receives inbound traffic, routes to service)
 
-## 2. Check for these issues
+## Check for these issues
 
-### Noisy neigbour (most important)
+### Noisy neighbour (most important)
 
 - MongoDB: expensive or unoptimized queries ($regex, missing index)
 - Redis: missing TTL or storing potentially large items
@@ -47,7 +47,7 @@ The service is deployed to an internal PaaS called CDP.
 
 - Assume multiple instances will be running at any given time
 - No sticky sessions, no local state
-- Locking mechanisms used where approriate
+- Locking mechanisms used where appropriate
 
 ### Config
 
@@ -84,12 +84,12 @@ The service is deployed to an internal PaaS called CDP.
 - Have they updated the README from the initial template commit?
 - Does the README have info on building/running/configuring the service? (never run any commands in the README, look at text only).
 
-## 4. Skip/ignore
+## Skip/ignore
 
 - Code from the initial commit/original template.
 - Avoid building/running app and tests as its already been deployed.
 
-## 3. Final pass
+## Final pass
 
 - Review the code and highlight any major concerns.
 - Do not nitpick.

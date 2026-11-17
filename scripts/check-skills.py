@@ -8,6 +8,8 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parent.parent
 MARKETPLACE = ROOT / ".claude-plugin" / "marketplace.json"
 NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
@@ -15,25 +17,14 @@ NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
 
 def parse_frontmatter(skill_md: Path) -> dict[str, str]:
     text = skill_md.read_text(encoding="utf-8")
-    lines = text.splitlines()
-    if len(lines) < 3 or lines[0].strip() != "---":
+    parts = text.split("---\n", 2)
+    if len(parts) < 3 or parts[0].strip():
         raise ValueError("missing frontmatter block delimited by ---")
-
-    fm: dict[str, str] = {}
-    i = 1
-    while i < len(lines):
-        line = lines[i]
-        i += 1
-        if line.strip() == "---":
-            break
-        if ":" not in line:
-            continue
-        key, value = line.split(":", 1)
-        fm[key.strip()] = value.strip()
-    else:
-        raise ValueError("frontmatter block is not closed")
-
-    return fm
+    try:
+        fm = yaml.safe_load(parts[1])
+    except yaml.YAMLError as exc:
+        raise ValueError(f"invalid YAML frontmatter: {exc}") from exc
+    return fm if isinstance(fm, dict) else {}
 
 
 def fail(errors: list[str]) -> None:
@@ -76,7 +67,7 @@ def main() -> int:
                 continue
             listed_paths.add(skill_path)
             plugin_paths.add(skill_path)
-            full = ROOT / skill_path.lstrip("./")
+            full = ROOT / skill_path
             if not full.exists():
                 errors.append(f"listed skill path does not exist: {skill_path}")
                 continue
