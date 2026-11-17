@@ -1,0 +1,19 @@
+{
+  "name": "cdp-ai-skills",
+  "owner": {
+    "name": "DEFRA CDP Platform team"
+  },
+  "metadata": {
+    "description": "AI agent skills for teams building services on the CDP platform"
+  },
+  "plugins": [
+    {
+      "name": "cdp",
+      "description": "CDP platform skills: production readiness review (PRR)",
+      "version": "0.1.0",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/cdp/prr"]
+    }
+  ]
+}
