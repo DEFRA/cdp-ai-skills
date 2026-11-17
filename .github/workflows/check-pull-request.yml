@@ -1,0 +1,26 @@
+name: Check Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+permissions:
+  contents: read
+
+jobs:
+  validate-skills:
+    name: Validate Skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - uses: actions/setup-python@v6.0.0
+        with:
+          python-version: "3.13"
+      - name: Validate marketplace and skills
+        run: python3 scripts/check-skills.py
