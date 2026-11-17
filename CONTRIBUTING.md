@@ -58,8 +58,8 @@ Symlink your skill into Cursor's skill folder and run it from Agent chat.
 
 ## Releasing
 
-- Bump the changed plugin `version` in `.claude-plugin/marketplace.json` in the same pull request.
-- Tag releases as `vX.Y.Z`.
+- Bump the changed plugin `version` in `.claude-plugin/marketplace.json` in the same pull request. That bump is the
+  release; there are no repository-wide release tags.
 
 ## Questions
 

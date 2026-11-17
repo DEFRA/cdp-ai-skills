@@ -72,9 +72,8 @@ it and to install from Claude Code marketplace.
 Versions are bumped manually for now. Claude Code only updates an installed plugin when its `version` changes, so a
 change merged without a bump never reaches users.
 
-When a plugin changes:
-1. Update that plugin's `version` in `.claude-plugin/marketplace.json` in the same pull request.
-2. After merging, tag a release as `vX.Y.Z`.
+When a plugin changes, update that plugin's `version` in `.claude-plugin/marketplace.json` in the same pull request.
+Each plugin is versioned on its own, so there are no repository-wide release tags.
 
 Users receive updates by running `claude plugin marketplace update cdp-ai-skills` (Claude Code) or `git pull`
 (Cursor/manual installs). Claude Code auto-update is off by default for third-party marketplaces unless users or admins
