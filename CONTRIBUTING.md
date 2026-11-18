@@ -33,7 +33,7 @@ When a team adds its first shared skill:
 
 1. Add a plugin entry named `<team>` in `.claude-plugin/marketplace.json`.
 2. Add that team's skill paths to the plugin `skills` list.
-3. Add a `CODEOWNERS` rule for `/skills/<team>/` when tenant team contributions begin.
+3. Add a rule for `/skills/<team>/` to `.github/CODEOWNERS`, following the format in its comments.
 
 ## Writing guidelines
 

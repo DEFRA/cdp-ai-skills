@@ -1,0 +1,17 @@
+# Code owners for shared skills. See CONTRIBUTING.md "New team onboarding".
+
+# Platform owns only what can break the repo for everyone: CI and this file,
+# the validation script, the marketplace (release) and its own skills.
+# Docs and tenant skills without a rule below need no code owner review.
+/.github/ @defra/cdp-platform
+/.claude-plugin/ @defra/cdp-platform
+/scripts/ @defra/cdp-platform
+/skills/cdp/ @defra/cdp-platform
+/LICENCE @defra/cdp-platform
+
+# Add one line per tenant team when it adds its first skill:
+#
+#   /skills/<team>/ @defra/<github-team>
+#
+# <github-team> is the team's GitHub team slug in the DEFRA organisation, and it
+# needs write access to this repository, otherwise GitHub ignores the rule.
