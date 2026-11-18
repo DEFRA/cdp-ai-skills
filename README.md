@@ -21,6 +21,28 @@ tenant self-check use.
 
 Each skill is a folder at `skills/<owner>/<skill>`, for example `skills/cdp/prr`.
 
+### Claude Code plugin
+
+Claude Code users can install the skills as a plugin from this repository's marketplace:
+
+```bash
+claude plugin marketplace add DEFRA/cdp-ai-skills
+claude plugin install cdp@cdp-ai-skills
+```
+
+Plugin skills are prefixed with the plugin name, so `prr` runs as `/cdp:prr`.
+
+### Copilot CLI plugin
+
+GitHub Copilot CLI users can install the same plugin from this repository's marketplace:
+
+```bash
+copilot plugin marketplace add DEFRA/cdp-ai-skills
+copilot plugin install cdp@cdp-ai-skills
+```
+
+The skill runs as `/cdp:prr`.
+
 ### Any tool, with GitHub CLI
 
 [`gh skill`](https://cli.github.com/manual/gh_skill) (GitHub CLI 2.90 or later, in public preview) downloads a skill
@@ -33,17 +55,6 @@ gh skill install DEFRA/cdp-ai-skills skills/cdp/prr --agent cursor --scope user
 Set `--agent` to your tool, for example `github-copilot`, `cursor`, `codex`, `gemini-cli` or `claude-code`
 (`gh skill install --help` lists them all). Leave it out to choose interactively. `--scope user` makes the skill
 available in every repository. Start a new session so the tool picks up the skill.
-
-### Claude Code plugin
-
-Claude Code users can install the skills as a plugin from this repository's marketplace instead:
-
-```bash
-claude plugin marketplace add DEFRA/cdp-ai-skills
-claude plugin install cdp@cdp-ai-skills
-```
-
-Plugin skills are prefixed with the plugin name, so `prr` runs as `/cdp:prr`.
 
 ### Without GitHub CLI
 
@@ -60,16 +71,39 @@ ln -s "$PWD/cdp-ai-skills/skills/cdp/prr" ~/.agents/skills/prr
 
 Open your tool in the root of the service repository you want to check, then either ask in plain words ("run a PRR
 self-check on this repo") or invoke the skill by name. The command differs by tool, for example `/prr` in Cursor,
-`$prr` in Codex and `/cdp:prr` in Claude Code with the plugin.
+`$prr` in Codex and `/cdp:prr` in Claude Code or Copilot CLI with the plugin.
 
 ## Update
 
-- **GitHub CLI installs:** run `gh skill update prr`, or `gh skill update --all` for every skill. It compares your copy
-  with `main`, so every change arrives, with or without a version bump.
-- **Linked installs:** run `git pull` in your `cdp-ai-skills` clone.
-- **Claude Code plugin:** run `claude plugin update cdp@cdp-ai-skills`, or in a session open `/plugin`, go to
-  Marketplaces, select `cdp-ai-skills` and choose **Update marketplace**. Choose **Enable auto-update** there to get
-  updates automatically. The new version loads in your next session, or after `/reload-plugins`.
+### Claude Code plugin
+
+```bash
+claude plugin update cdp@cdp-ai-skills
+```
+
+Or in a session open `/plugin`, go to Marketplaces, select `cdp-ai-skills` and choose **Update marketplace**. Choose
+**Enable auto-update** there to get updates automatically. The new version loads in your next session, or after
+`/reload-plugins`.
+
+### Copilot CLI plugin
+
+```bash
+copilot plugin update cdp@cdp-ai-skills
+```
+
+### Any tool, with GitHub CLI
+
+```bash
+gh skill update prr      # or --all for every skill
+```
+
+It compares your copy with `main`, so every change arrives, with or without a version bump.
+
+### Without GitHub CLI
+
+```bash
+git -C cdp-ai-skills pull
+```
 
 ## Releases
 

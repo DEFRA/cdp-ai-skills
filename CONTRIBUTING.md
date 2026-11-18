@@ -5,7 +5,8 @@ How to add and maintain skills in `cdp-ai-skills`.
 ## What belongs here
 
 - Skills useful to more than one service/team on CDP.
-- Team-local skills for one service should stay in that service repository under `.claude/skills/` or `.agents/skills/`.
+- Not here: a skill only one service needs. Keep it in that service's repository (`.claude/skills/` or
+  `.agents/skills/`).
 
 ## Repository layout
 
@@ -43,43 +44,13 @@ When a team adds its first shared skill:
 
 ## Testing locally
 
-Each way below runs the skill from your clone, so edits apply in your next session without a push or `version` bump.
+Install as in the [README](README.md#install), but from your clone, so edits apply in your next session without a
+push or `version` bump:
 
-### Claude Code
-
-Install the plugin from your clone instead of GitHub:
-
-```bash
-claude plugin marketplace add /path/to/cdp-ai-skills
-claude plugin install <plugin>@cdp-ai-skills
-```
-
-Run it as `/<owner>:<skill>` (for example `/cdp:prr`). If you added the GitHub marketplace before, remove it first
-with `claude plugin marketplace remove cdp-ai-skills`.
-
-### Copilot CLI
-
-Install the plugin from your clone instead of GitHub:
-
-```bash
-copilot plugin marketplace add /path/to/cdp-ai-skills
-copilot plugin install <plugin>@cdp-ai-skills
-```
-
-Run it as `/<owner>:<skill>` (for example `/cdp:prr`). If you added the GitHub marketplace before, remove it first
-with `copilot plugin marketplace remove cdp-ai-skills`.
-
-### Cursor and other tools
-
-Replace the `gh skill install` copy with a symlink to your clone:
-
-```bash
-rm -rf ~/.agents/skills/<skill>
-ln -s "$PWD/skills/<owner>/<skill>" ~/.agents/skills/<skill>
-```
-
-Use your tool's skills folder if it isn't `~/.agents/skills`. Run it as `/<skill>`. To go back, delete the link and run
-`gh skill install` again.
+- **Claude Code or Copilot CLI plugin:** use the path to your clone in place of `DEFRA/cdp-ai-skills`, e.g.
+  `claude plugin marketplace add ~/dev/cdp-ai-skills`. Remove the GitHub marketplace first if you added it.
+- **Other tools:** symlink the skill folder from your clone, as in
+  [Without GitHub CLI](README.md#without-github-cli), in place of the `gh skill install` copy.
 
 ## Releasing
 
