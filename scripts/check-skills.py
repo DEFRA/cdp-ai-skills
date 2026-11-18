@@ -49,47 +49,28 @@ def main() -> int:
     if not isinstance(plugins, list):
         fail(["marketplace.plugins must be a list"])
 
-    plugin_to_skills: dict[str, set[str]] = {}
-    listed_paths: set[str] = set()
+    # Each owner's plugin lists its owner folder, which Claude Code scans for skills.
+    plugin_names: set[str] = set()
     for plugin in plugins:
         name = plugin.get("name")
-        skills = plugin.get("skills")
         if not isinstance(name, str):
             errors.append("plugin name must be a string")
             continue
-        if not isinstance(skills, list):
-            errors.append(f"plugin '{name}' skills must be a list")
-            continue
-        plugin_paths: set[str] = set()
-        for skill_path in skills:
-            if not isinstance(skill_path, str):
-                errors.append(f"plugin '{name}' has non-string skill path")
-                continue
-            listed_paths.add(skill_path)
-            plugin_paths.add(skill_path)
-            full = ROOT / skill_path
-            if not full.exists():
-                errors.append(f"listed skill path does not exist: {skill_path}")
-                continue
-            expected_prefix = f"./skills/{name}/"
-            if not skill_path.startswith(expected_prefix):
-                errors.append(
-                    f"plugin '{name}' path must start with '{expected_prefix}': {skill_path}"
-                )
-        plugin_to_skills[name] = plugin_paths
+        plugin_names.add(name)
+        expected = [f"./skills/{name}/"]
+        if plugin.get("skills") != expected:
+            errors.append(f"plugin '{name}' skills must be {json.dumps(expected)}")
+        elif not (ROOT / "skills" / name).is_dir():
+            errors.append(f"plugin '{name}' has no skills folder: skills/{name}/")
 
-    discovered_paths: set[str] = set()
     for skill_md in ROOT.glob("skills/*/*/SKILL.md"):
         owner = skill_md.parent.parent.name
         skill_name = skill_md.parent.name
         rel = "./" + skill_md.parent.relative_to(ROOT).as_posix()
-        discovered_paths.add(rel)
 
-        if owner not in plugin_to_skills:
+        if owner not in plugin_names:
             errors.append(f"owner '{owner}' has skill but no plugin entry: {rel}")
             continue
-        if rel not in plugin_to_skills[owner]:
-            errors.append(f"skill not listed in plugin '{owner}': {rel}")
 
         try:
             fm = parse_frontmatter(skill_md)
@@ -116,9 +97,6 @@ def main() -> int:
                 f"{skill_md.relative_to(ROOT)}: description exceeds 1024 chars "
                 f"({len(desc)})"
             )
-
-    for listed in sorted(listed_paths - discovered_paths):
-        errors.append(f"marketplace lists missing skill directory: {listed}")
 
     if errors:
         fail(errors)

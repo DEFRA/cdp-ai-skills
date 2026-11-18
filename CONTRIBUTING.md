@@ -23,17 +23,17 @@ Skills are grouped by owner:
 3. In `SKILL.md` frontmatter:
    - `name` must match `<skill>` exactly.
    - `description` must explain what the skill does and when to use it.
-4. Add `./skills/<owner>/<skill>` to the matching plugin entry in `.claude-plugin/marketplace.json`.
-5. Run `python3 scripts/check-skills.py`.
-6. Open a pull request.
+4. Run `python3 scripts/check-skills.py`.
+5. Open a pull request.
+
+The owner's plugin picks up every skill folder under `skills/<owner>/`, so `marketplace.json` needs no change.
 
 ## New team onboarding
 
 When a team adds its first shared skill:
 
-1. Add a plugin entry named `<team>` in `.claude-plugin/marketplace.json`.
-2. Add that team's skill paths to the plugin `skills` list.
-3. Add a rule for `/skills/<team>/` to `.github/CODEOWNERS`, following the format in its comments.
+1. Add a plugin entry named `<team>` in `.claude-plugin/marketplace.json`, with `"skills": ["./skills/<team>/"]`.
+2. Add a rule for `/skills/<team>/` to `.github/CODEOWNERS`, following the format in its comments.
 
 ## Writing guidelines
 
@@ -62,7 +62,8 @@ claude plugin marketplace add /path/to/cdp-ai-skills
 claude plugin install <plugin>@cdp-ai-skills
 ```
 
-Run the skill by slash command (for example `/cdp:prr`). It refreshes only on a `version` bump.
+Run the skill by slash command (for example `/cdp:prr`). A plugin from a local-path marketplace loads straight from
+your clone, so edits apply without a `version` bump; only installs from GitHub are pinned to `version`.
 
 ### Cursor
 

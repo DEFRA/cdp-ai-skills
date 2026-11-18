@@ -9,11 +9,11 @@
   "plugins": [
     {
       "name": "cdp",
-      "description": "CDP platform skills: production readiness review (PRR)",
+      "description": "CDP platform skills",
       "version": "0.1.0",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/cdp/prr"]
+      "skills": ["./skills/cdp/"]
     }
   ]
 }

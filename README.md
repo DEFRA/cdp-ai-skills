@@ -88,7 +88,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Layout
 
 ```text
-.claude-plugin/marketplace.json         Claude Code plugin marketplace listing (other tools don't need it)
+.claude-plugin/marketplace.json         plugin marketplace listing for Claude Code (Copilot CLI reads it too)
 skills/<owner>/<skill>/SKILL.md         frontmatter (name, description) and instructions
 skills/<owner>/<skill>/references/      longer reference material
 skills/<owner>/<skill>/assets/          optional templates and static files
