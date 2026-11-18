@@ -43,31 +43,43 @@ When a team adds its first shared skill:
 
 ## Testing locally
 
-Replace your installed copy with a symlink to your clone, so edits apply from the next session without a release:
+Each way below runs the skill from your clone, so edits apply in your next session without a push or `version` bump.
 
-```bash
-rm -rf ~/.claude/skills/<skill> ~/.copilot/skills/<skill>
-ln -s "$PWD/skills/<owner>/<skill>" ~/.claude/skills/<skill>
-ln -s "$PWD/skills/<owner>/<skill>" ~/.copilot/skills/<skill>
-```
+### Claude Code
 
-Run it as `/<skill>`. The `rm` removes only the `gh skill install` copies. The Claude Code plugin, if installed, lives
-in `~/.claude/plugins/` and still runs the released version as `/<owner>:<skill>`. To go back, delete the links and
-run `gh skill install` again.
-
-### Claude Code plugin
+Install the plugin from your clone instead of GitHub:
 
 ```bash
 claude plugin marketplace add /path/to/cdp-ai-skills
 claude plugin install <plugin>@cdp-ai-skills
 ```
 
-Run the skill by slash command (for example `/cdp:prr`). A plugin from a local-path marketplace loads straight from
-your clone, so edits apply without a `version` bump; only installs from GitHub are pinned to `version`.
+Run it as `/<owner>:<skill>` (for example `/cdp:prr`). If you added the GitHub marketplace before, remove it first
+with `claude plugin marketplace remove cdp-ai-skills`.
 
-### Cursor
+### Copilot CLI
 
-Symlink your skill into Cursor's skill folder and run it from Agent chat.
+Install the plugin from your clone instead of GitHub:
+
+```bash
+copilot plugin marketplace add /path/to/cdp-ai-skills
+copilot plugin install <plugin>@cdp-ai-skills
+```
+
+Run it as `/<owner>:<skill>` (for example `/cdp:prr`). If you added the GitHub marketplace before, remove it first
+with `copilot plugin marketplace remove cdp-ai-skills`.
+
+### Cursor and other tools
+
+Replace the `gh skill install` copy with a symlink to your clone:
+
+```bash
+rm -rf ~/.agents/skills/<skill>
+ln -s "$PWD/skills/<owner>/<skill>" ~/.agents/skills/<skill>
+```
+
+Use your tool's skills folder if it isn't `~/.agents/skills`. Run it as `/<skill>`. To go back, delete the link and run
+`gh skill install` again.
 
 ## Releasing
 
