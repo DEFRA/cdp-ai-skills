@@ -48,9 +48,11 @@ Install as in the [README](README.md#install), but from your clone, so edits app
 push or `version` bump:
 
 - **Claude Code or Copilot CLI plugin:** use the path to your clone in place of `DEFRA/cdp-ai-skills`, e.g.
-  `claude plugin marketplace add ~/dev/cdp-ai-skills`. Remove the GitHub marketplace first if you added it.
-- **Other tools:** symlink the skill folder from your clone, as in
-  [Without GitHub CLI](README.md#without-github-cli), in place of the `gh skill install` copy.
+  `claude plugin marketplace add ~/dev/cdp-ai-skills`. Both marketplaces are named `cdp-ai-skills`, so remove the
+  GitHub one first if you added it: `claude plugin marketplace remove cdp-ai-skills`.
+- **Other tools:** delete the `gh skill install` copy first (`rm -rf ~/.agents/skills/<skill>`), then symlink the
+  skill folder from your clone, as in [Without GitHub CLI](README.md#without-github-cli). `ln -s` onto an existing
+  folder links inside it instead of replacing it.
 
 ## Releasing
 

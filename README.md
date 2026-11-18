@@ -101,14 +101,12 @@ It compares your copy with `main`, so every change arrives, with or without a ve
 
 ### Without GitHub CLI
 
-```bash
-git -C cdp-ai-skills pull
-```
+Run `git pull` in your `cdp-ai-skills` clone.
 
 ## Releases
 
-Versions are bumped manually for now. They only matter to Claude Code plugin installs: Claude Code updates an
-installed plugin only when its `version` changes, so a change merged without a bump never reaches those users. GitHub
+Versions are bumped manually for now. They only matter to plugin installs (Claude Code and Copilot CLI): an installed
+plugin updates only when its `version` changes, so a change merged without a bump never reaches those users. GitHub
 CLI and linked installs get every change on `main`.
 
 When a plugin changes, update that plugin's `version` in `.claude-plugin/marketplace.json` in the same pull request.
