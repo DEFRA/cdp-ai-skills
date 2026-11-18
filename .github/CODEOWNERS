@@ -1,0 +1,11 @@
+# Code owners for shared skills. See CONTRIBUTING.md "New team onboarding".
+
+# Platform owns everything not matched below, including skills/cdp/ and the marketplace.
+* @defra/cdp-platform
+
+# Add one line per tenant team when it adds its first skill:
+#
+#   /skills/<team>/ @DEFRA/<github-team>
+#
+# <github-team> is the team's GitHub team slug in the DEFRA organisation, and it
+# needs write access to this repository, otherwise GitHub ignores the rule.
