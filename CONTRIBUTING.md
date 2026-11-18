@@ -43,14 +43,26 @@ When a team adds its first shared skill:
 
 ## Testing locally
 
-### Claude Code
+Replace your installed copy with a symlink to your clone, so edits apply from the next session without a release:
+
+```bash
+rm -rf ~/.claude/skills/<skill> ~/.copilot/skills/<skill>
+ln -s "$PWD/skills/<owner>/<skill>" ~/.claude/skills/<skill>
+ln -s "$PWD/skills/<owner>/<skill>" ~/.copilot/skills/<skill>
+```
+
+Run it as `/<skill>`. The `rm` removes only the `gh skill install` copies. The Claude Code plugin, if installed, lives
+in `~/.claude/plugins/` and still runs the released version as `/<owner>:<skill>`. To go back, delete the links and
+run `gh skill install` again.
+
+### Claude Code plugin
 
 ```bash
 claude plugin marketplace add /path/to/cdp-ai-skills
 claude plugin install <plugin>@cdp-ai-skills
 ```
 
-Run the skill by slash command (for example `/cdp:prr`).
+Run the skill by slash command (for example `/cdp:prr`). It refreshes only on a `version` bump.
 
 ### Cursor
 
